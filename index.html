@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>图片展示 | Photo Gallery</title>
+<style>
+:root{font-family:Arial,'Microsoft YaHei',sans-serif;color:#172033;background:#f5f7fb}*{box-sizing:border-box}body{margin:0}header{background:#fff;padding:48px 20px 36px;text-align:center;border-bottom:1px solid #e7ebf2}h1{margin:0 0 10px;font-size:clamp(28px,5vw,42px)}header p{color:#687487;margin:0}.wrap{max-width:1250px;margin:auto;padding:34px 20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}.card{background:white;border-radius:15px;overflow:hidden;box-shadow:0 6px 25px #17203310;cursor:pointer;border:1px solid #edf0f4}.card img{width:100%;height:235px;object-fit:contain;padding:12px;display:block}.card span{display:block;padding:12px 16px;border-top:1px solid #f0f1f4;font-weight:600}.card:hover{transform:translateY(-3px);transition:.2s}dialog{border:0;border-radius:16px;padding:15px;background:#fff;max-width:96vw;max-height:95vh}dialog::backdrop{background:#07101bd9}dialog img{display:block;max-width:90vw;max-height:80vh;object-fit:contain}dialog button{float:right;background:#182337;color:white;border:0;border-radius:8px;padding:8px 14px;margin-bottom:10px;cursor:pointer}.hint{text-align:center;color:#69768a;margin-top:26px}
+</style>
+</head><body>
+<header><h1>图片展示 · Photo Gallery</h1><p>点击图片可查看大图 / Click an image to enlarge</p></header>
+<main class="wrap"><section id="gallery" class="grid"></section><p class="hint">共 20 张图片 · 1.jpg – 20.jpg</p></main>
+<dialog id="viewer"><button id="close">关闭 ×</button><img id="large" alt="放大图片"></dialog>
+<script>
+const gallery=document.querySelector('#gallery'),viewer=document.querySelector('#viewer'),large=document.querySelector('#large');
+for(let i=1;i<=20;i++){const card=document.createElement('article');card.className='card';const img=document.createElement('img');img.src=`${i}.jpg`;img.alt=`图片 ${i}`;img.loading='lazy';const label=document.createElement('span');label.textContent=`图片 ${String(i).padStart(2,'0')}`;card.append(img,label);card.addEventListener('click',()=>{large.src=img.src;viewer.showModal()});gallery.append(card)}
+document.querySelector('#close').onclick=()=>viewer.close();viewer.addEventListener('click',e=>{if(e.target===viewer)viewer.close()});
+</script></body></html>
